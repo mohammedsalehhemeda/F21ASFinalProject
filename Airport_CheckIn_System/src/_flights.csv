@@ -1,0 +1,7 @@
+Flight Code,Carrier Name,Destination Code,Airport,Destination,Maximum Passengers,Maximum Baggage Weight Per Person (in kg),Max Baggage Volume Per Person (in cu.m),Excess Baggage Fee (AED per kg)
+RS-4982,Air Seoul,SEL,Incheon Airport,Seoul-South Korea,50,28,3.86,75
+5A-2930,Apline Air Express,STN,Stansted Airport,London-UK,70,26,4.58,65
+M6-1922,Amerijet International,LGW,London Gatwik Airport,London-UK,35,31,4.2,80
+6E-7392,Indigo Airlines,MAA,Chennai International Airport,Chennai-India,80,21,3.95,55
+EK-3893,Emirates Airlines,TRZ,Tiruchirappalli International Airport,Trichy-India,60,32,5,120
+GF-2178,Gulf Air,AMM,Queen Alia International Airport,Amman-Jordan,60,35,4.75,80
