@@ -20,7 +20,7 @@ public class Desk1 implements Runnable {
  */
     public void readBookingFile() {
         try {
-            String csvFilePath = "/Users/mohammedkhedr/Public/JavaProjects/F21AS_Advance_Software_Engineering/AirportCheckinSystem/src/bookings.csv";
+            String csvFilePath = "_bookings.csv";
             BufferedReader br = new BufferedReader(new FileReader(csvFilePath)); //Reading CSV file
             String line = br.readLine(); // To skip the first line - header.
             while((line = br.readLine()) != null){
