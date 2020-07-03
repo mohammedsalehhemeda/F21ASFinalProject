@@ -15,9 +15,10 @@ public class passengerFile {
     int counter;
 	bookingDetails pd = new bookingDetails("ss","ss","ss","ss");
     String[] passengerNames;
-	ArrayList<String> name1 = new ArrayList<String>();
+	
+    ArrayList<String> name1 = new ArrayList<String>();
 
-		public void readFile1()
+		public ArrayList<String> readFile1()
 		{
 			
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -35,7 +36,7 @@ public class passengerFile {
         e.printStackTrace();
     }
 
-        System.out.println(name1.get(3));
+        return name1;
 
 }
 }

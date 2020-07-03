@@ -2,12 +2,11 @@ package cw2;
 
 
 
-class passengers implements Runnable 
+class passengers extends passengerFile implements Runnable 
 {
+	  passengerFile newFile = new passengerFile();
+	  
 	
-passengerFile newFile = new passengerFile();
-
-
 	
    Thread passengerthread ;
    passengers()
@@ -20,9 +19,9 @@ passengerFile newFile = new passengerFile();
    {
       try
       {
-        for (int i=0 ;i<10;i++)
+        for (int i=1 ;i<10;i++)
         {
-          System.out.println("Passenger " + i);
+          System.out.println("Passenger: " + readFile1().get(i));
           Thread.sleep(1000);
         }
      }

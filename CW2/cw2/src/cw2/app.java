@@ -10,11 +10,9 @@ public class app {
 		
 
         
-		passengers cnt = new passengers();
+		  passengers cnt = new passengers();
 		  passengerFile newFile = new passengerFile();
-		  
-		  newFile.readFile1();
-		      
+		  		      
 		  
 		  try
 	       {
