@@ -24,23 +24,10 @@ public class passengerFile {
 		
             while ((line = br.readLine()) != null) {
         	
-            // use comma as separator
             String[] passengerDetails = line.split(cvsSplitBy);
             bookingDetails pd = new bookingDetails(passengerDetails[0], passengerDetails[1], passengerDetails[2], passengerDetails[3]);
 
-//            ArrayList<String> names = new ArrayList<String>();
             name1.add(passengerDetails[2]);
-            
-            
-//            
-//			passengerNames[counter]=passengerDetails[2];
-//            
-//            for(counter = 0; counter<passengerDetails[2].length(); counter++ )
-//            System.out.println(passengerNames[counter]);
-//            
-            
-    	   // list = passengerDetails[2];
-          //  System.out.println(list);
 
         }
             
