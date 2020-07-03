@@ -1,7 +1,14 @@
 package cw2;
 
-class passengers implements Runnable
+
+
+class passengers implements Runnable 
 {
+	
+passengerFile newFile = new passengerFile();
+
+
+	
    Thread passengerthread ;
    passengers()
    { 
