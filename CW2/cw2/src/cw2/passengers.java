@@ -1,12 +1,15 @@
 package cw2;
 
-
+import java.util.ArrayList;
+import java.util.Collections;
 
 class passengers extends passengerFile implements Runnable 
 {
+    ArrayList<String> randomized = new ArrayList<String>();
+
 	  passengerFile newFile = new passengerFile();
 	  
-	
+	 
 	
    Thread passengerthread ;
    passengers()
@@ -15,8 +18,12 @@ class passengers extends passengerFile implements Runnable
       System.out.println("Passengers Thread" + passengerthread);
       passengerthread.start();
    }
+   
    public void run()
    {
+	   randomized = readFile1();
+	   Collections.shuffle(readFile1());
+	   
       try
       {
         for (int i=1 ;i<10;i++)
