@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.io.IOException;
-import java.util.*;
 
-public class Desk1 implements Runnable {
-	
+public class Desk1 implements Runnable{
     private HashMap<String, Passenger> bookingPassengerHashMap;
     private HashMap<String, Passenger> lastNamePassengerHashMap;
 
@@ -18,7 +17,8 @@ public class Desk1 implements Runnable {
  * @return hash map (reference number, Passenger)
  * @return hash map (last name, Passenger)
  */
-    public void readBookingFile() {
+    public void run() {
+    	System.out.println("Starting thread..."+Thread.currentThread().getName());
         try {
             String csvFilePath = "_bookings.csv";
             BufferedReader br = new BufferedReader(new FileReader(csvFilePath)); //Reading CSV file
@@ -36,6 +36,12 @@ public class Desk1 implements Runnable {
             System.out.println("Error with the CSV file");
 
         }
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			System.out.println(e1.getMessage());
+		}
+    	System.out.println("Completing thread..."+Thread.currentThread().getName());
     }
 
 /**
@@ -54,5 +60,4 @@ public class Desk1 implements Runnable {
     public Passenger getPassengerByLastName(String lastName){
         return lastNamePassengerHashMap.get(lastName);
     }
-
 }
