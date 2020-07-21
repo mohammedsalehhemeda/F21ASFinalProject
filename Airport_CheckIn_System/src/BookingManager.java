@@ -1,8 +1,8 @@
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
-import f21as.checkinsystem.models.*;
+import f21as.checkinsystem.models.Baggage;
+import f21as.checkinsystem.models.Booking;
+import f21as.checkinsystem.models.Flight;
 
 public class BookingManager {
 

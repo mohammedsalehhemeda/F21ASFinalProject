@@ -30,7 +30,6 @@ public class Booking {
 	}
 	
 	//Setters
-	
 	public void updatePassenger(Passenger _passenger) {
 		passenger = _passenger;
 	}
@@ -72,4 +71,5 @@ public class Booking {
 		passenger = _passenger;
 		is_checked_in = checkin_status;
 	}
+	
 }

@@ -7,8 +7,8 @@ public class CheckinManager {
 	
 	private ArrayList<String> raw_booking_data;
 	private ArrayList<String> raw_flight_data;
-	private final String BOOKING_DETAILS = "_bookings.csv"; //Absolute path to the csv file
-	private final String FLIGHT_DETAILS = "_flights.csv";
+	private final String BOOKING_DETAILS = "src/_bookings.csv"; //Absolute path to the csv file
+	private final String FLIGHT_DETAILS = "src/_flights.csv";
 			
 	/**
 	 * Main Entry method for the application
