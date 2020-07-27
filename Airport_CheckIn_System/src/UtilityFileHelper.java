@@ -12,7 +12,7 @@ public class UtilityFileHelper {
 	 */
 	public ArrayList<String> readCSV(String file_path, Boolean ignore_header) {
 		
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		try {
 				//String current_directory = System.getProperty("user.dir"); //To get current directory.
 					
@@ -30,13 +30,14 @@ public class UtilityFileHelper {
 					}
 				
 					scanner.close();
-					return result;
+					Collections.shuffle(result);
+					return (ArrayList<String>) result;
 			} catch (Exception ex) {
 			System.out.println(ex.toString());
 			System.out.println(0);
 			return null; 
 			}
-		}
+	}
 
 	/**
 	 * Writes the string to a text file
@@ -84,11 +85,13 @@ public class UtilityFileHelper {
 			Boolean checked_in = Boolean.parseBoolean( components[3].trim());
 			
 			if (!Booking.isValidReference(booking_ref)) return; //If booking reference is not valid, don't proceed.
-			SimpleEntry<Boolean,Passenger> passenger_entry =  creator.createPassenger(passenger_name);
+			SimpleEntry<Boolean,Passenger> passenger_entry =  creator.createPassenger(booking_ref, passenger_name, checked_in);
 			if (!passenger_entry.getKey()) return; //Unable to create passenger, don't proceed.
 			
 			SimpleEntry<Boolean,Booking> booking_entry =  creator.createBooking(booking_ref, flight_code, passenger_entry.getValue(), checked_in);
 			if (!booking_entry.getKey()) return; //Unable to create booking don't proceed.
+			
+			PassengerQueue.AddBooking(booking_entry.getValue()); // Add the created booking to PassengerQueue to be accessed later by CheckinDesk
 			
 			Boolean is_successful = BookingManager.addBooking(booking_ref, booking_entry.getValue()); //Add booking
 			System.out.println(is_successful.toString() + " : Adding the booking detail with reference number - " + booking_ref);
