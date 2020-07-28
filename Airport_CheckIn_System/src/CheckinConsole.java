@@ -107,7 +107,7 @@ public class CheckinConsole extends JFrame {
             }
             
     		try {
-    			Thread.sleep(1000);
+    			Thread.sleep(100);
     		} catch (InterruptedException e1) {
     			System.out.println(e1.getMessage());
     		}
@@ -128,7 +128,7 @@ public class CheckinConsole extends JFrame {
                 }
                 while(iter.hasNext()){
                     bookingDetails = (Booking) iter.next();
-                    desk1_result.append(bookingDetails.getBookingDetails());
+                    desk1_result.setText(bookingDetails.getBookingDetails());
                     iter.remove();
                 }
             }
