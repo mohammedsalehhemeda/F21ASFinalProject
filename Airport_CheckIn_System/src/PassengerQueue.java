@@ -1,11 +1,13 @@
-import java.util.*; 
+import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import f21as.checkinsystem.models.*;
 
 public class PassengerQueue {
 	
 	private static PassengerQueue instance = null; 
-	private static Queue<Booking> queueBooking = new LinkedList<>(); 
+	private static Queue<Booking> queueBooking = new LinkedList<>();
 	
 	private PassengerQueue() {
 		if (instance != null) {
@@ -31,5 +33,4 @@ public class PassengerQueue {
 	public static Queue<Booking> ReadQueue() {
 		return queueBooking;
 	}
-
 }

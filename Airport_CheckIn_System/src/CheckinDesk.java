@@ -27,7 +27,7 @@ public class CheckinDesk implements Runnable{
  * @return hash map (last name, Passenger)
  */
     public void run() {
-    	System.out.println("Starting thread..."+Thread.currentThread().getName());
+//    	System.out.println("Starting thread..."+Thread.currentThread().getName());
         /*
     	try {
             String csvFilePath = "src/_bookings.csv";
@@ -65,7 +65,7 @@ public class CheckinDesk implements Runnable{
 		} catch (InterruptedException e1) {
 			System.out.println(e1.getMessage());
 		}
-    	System.out.println("Completing thread..."+Thread.currentThread().getName());
+//    	System.out.println("Completing thread..."+Thread.currentThread().getName());
     }
 
 /**
