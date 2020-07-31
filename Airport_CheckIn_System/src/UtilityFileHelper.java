@@ -75,6 +75,9 @@ public class UtilityFileHelper {
 			//Booking Reference,Flight Code,Passenger Name,Checkin Status
 			//RS-MOH-050220-APRKSN,RS-4982,Monica Mohamed,TRUE
 			
+			Random rand = new Random();
+			Double length_cm, width_cm, height_cm, weight_kg;
+			
 			String components[] = line.split(",");
 			
 			if (components.length == 0 || components.length  != 4) return ; //The line has no data or in sufficient data
@@ -91,7 +94,20 @@ public class UtilityFileHelper {
 			SimpleEntry<Boolean,Booking> booking_entry =  creator.createBooking(booking_ref, flight_code, passenger_entry.getValue(), checked_in);
 			if (!booking_entry.getKey()) return; //Unable to create booking don't proceed.
 			
-			PassengerQueue.AddBooking(booking_entry.getValue()); // Add the created booking to PassengerQueue to be accessed later by CheckinDesk
+			// Randomly assign a Baggage to the Passenger Booking 
+			length_cm = (double) (rand.nextFloat() * (150 - 50) + 50); // max dimensions= 150cm , min= 50cm
+			width_cm = (double) (rand.nextFloat() * (150 - 50) + 50);  
+			height_cm = (double) (rand.nextFloat() * (150 - 50) + 50);
+			weight_kg = (double) (rand.nextFloat() * (40 - 5) + 5); // max weight= 40 kg , min= 5kg 
+			
+			SimpleEntry<Boolean, Baggage> baggage_entry = creator.createBaggage(length_cm, width_cm, height_cm, weight_kg);
+			if (!baggage_entry.getKey()) return; //Unable to create booking don't proceed.
+			
+			// Add Baggage to Booking 
+			booking_entry.getValue().setBaggage(baggage_entry.getValue());
+			
+			// Add Booking to PassengerQueue 
+			PassengerQueue.AddBooking(booking_entry.getValue());
 			
 			Boolean is_successful = BookingManager.addBooking(booking_ref, booking_entry.getValue()); //Add booking
 			System.out.println(is_successful.toString() + " : Adding the booking detail with reference number - " + booking_ref);

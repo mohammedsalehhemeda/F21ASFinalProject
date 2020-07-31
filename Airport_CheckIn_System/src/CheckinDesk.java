@@ -2,90 +2,93 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
+import f21as.checkinsystem.models.Baggage;
 import f21as.checkinsystem.models.Booking;
+import f21as.checkinsystem.models.Flight;
 import f21as.checkinsystem.models.Passenger;
 
 import java.io.IOException;
 
 public class CheckinDesk implements Runnable{
-    //private HashMap<String, Passenger> bookingPassengerHashMap;
-    //private HashMap<String, Passenger> lastNamePassengerHashMap;
     
-    PassengerQueue passengerQueue = null; 
     Booking bookingDetails = null; 
+    PassengerQueue passengerQueue;
+    long checkinTime;
 
-    public CheckinDesk(PassengerQueue q){
-        //bookingPassengerHashMap = new HashMap<>();
-        //lastNamePassengerHashMap = new HashMap<>();
-        passengerQueue = q; 
-        
+    public CheckinDesk(PassengerQueue q, long checkinTime){
+    	passengerQueue = q;
+    	this.checkinTime = checkinTime;
     }
-/**
- * Reading bookings.csv file and storing the passenger's data in HashMap once with a reference number as the key 
- * and another time as the last name as the key
- * @return hash map (reference number, Passenger)
- * @return hash map (last name, Passenger)
- */
+    
+    /**
+	 * Run the main thread where each Passenger/Booking will be processed and assigned to their Flight 
+	 */
     public void run() {
     	System.out.println("Starting thread..."+Thread.currentThread().getName());
-        /*
-    	try {
-            String csvFilePath = "src/_bookings.csv";
-            BufferedReader br = new BufferedReader(new FileReader(csvFilePath)); //Reading CSV file
-            String line = br.readLine(); // To skip the first line - header.
-            while((line = br.readLine()) != null){
-                String split[] = line.split(","); //Splitting by ','
-                boolean checkedIn = false;
-                if (split[3].equals("TRUE"))
-                    checkedIn = true;
-                Passenger p = new Passenger(split[0], split[2], checkedIn); //Storing cells in as Passenger objects
-                bookingPassengerHashMap.put(split[0], p);
-                //lastNamePassengerHashMap.put(split[2], p);
-            }
-        } catch (IOException e) { //Throwing IOEXCEPTON while reading the file
-            System.out.println(e.getMessage() + " Error with the CSV file");
-
-        }
-        */
+        
         synchronized(passengerQueue){
         	Iterator iter = passengerQueue.ReadQueue().iterator();
         	if(iter == null){
             	System.out.println("Queue is empty. No more passengers to proceed..."+Thread.currentThread().getName());
-                //System.exit(1);
             }
             while(iter.hasNext()){
                 bookingDetails = (Booking) iter.next();
                 System.out.println(bookingDetails.getBookingDetails());
+                processCheckIn(bookingDetails, Thread.currentThread().getName());
                 iter.remove();
             }
         }
         
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(checkinTime); // This represent reasonable time for checkIn 
 		} catch (InterruptedException e1) {
 			System.out.println(e1.getMessage());
 		}
+		
+		// an amount of time - we should check if 
     	System.out.println("Completing thread..."+Thread.currentThread().getName());
     }
-
-/**
- * Returns Passenger details with reference number
- * @param referenceNumber
- * @return Passenger details with reference number
- */
-    /*
-    public Passenger getPassengerByReferenceNumber(String referenceNumber){
-        return bookingPassengerHashMap.get(referenceNumber);
-    }
-    */
+    
     /**
-     * Returns Passenger details with last name
-     * @param referenceNumber
-     * @return Passenger details with last name
-     */
-    /*
-    public Passenger getPassengerByLastName(String lastName){
-        return lastNamePassengerHashMap.get(lastName);
+	 * Assign each Booking to the Flight and process the check in  
+	 */
+    public Boolean processCheckIn(Booking bookingDetails, String threadName) {
+    	Boolean checkin_status = false; 
+		try {
+			if (bookingDetails.getCheckinStatus()) {
+				checkin_status = true;
+				System.out.println(threadName + ": Booking is already checked in. Please proceed to Gate."); 
+			}
+			else {
+				Flight flight = BookingManager.getFlight(bookingDetails.getFlightCode()); 
+				
+				if(flight == null) {
+					System.out.println(threadName + ": Flight is not found.");
+					checkin_status = false; 
+					return checkin_status;
+				}
+				
+				Baggage bg = bookingDetails.getBaggage(); 
+				Double excess_fees = bg.calcuateExcessFee(flight.getMaxBaggageWeight(), flight.getExcessFeePerKg()); 
+				
+				// check excess fees status 
+				if (excess_fees > 0.0) {
+					System.out.println(threadName + ": You are required to pay excess fees: " + excess_fees.toString() + "AED.");
+					bg.setExcessFee(excess_fees);
+				}
+				
+				checkin_status = true; 
+				bookingDetails.updateCheckinStatus(checkin_status);
+				
+				System.out.println(threadName + ": Check in is complete. Please proceed to Gate.");
+				
+			}
+		}
+		catch(Exception e){
+			System.out.println(threadName + ": An error occured while check in booking details." + e.getMessage());
+		}
+    	
+		return checkin_status;
     }
-    */
+        
 }
