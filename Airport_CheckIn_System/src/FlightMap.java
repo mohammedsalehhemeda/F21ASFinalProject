@@ -15,4 +15,6 @@ public class FlightMap {
 		
 		System.out.println(flightNumber + " - " + numberOfPassengers);
 	}
+	
+	
 }

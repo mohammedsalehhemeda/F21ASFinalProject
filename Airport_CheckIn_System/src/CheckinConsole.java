@@ -1,8 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.util.Iterator;
-import java.util.Random;
-
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import f21as.checkinsystem.models.*;
@@ -31,20 +29,22 @@ public class CheckinConsole extends JFrame {
 		maincontent_pane.setLayout(mainCard);
 	}
 
-	private void GUInterface() {
-		// This panel for displaying queue updates
+	private void GUInterface() { // This method to create the GUI interface and windows
 		panel_queuedetails = new JPanel();
 		maincontent_pane.add(panel_queuedetails);
+		
 		JLabel lblNewLabel = new JLabel("Waiting Queue :");
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
 		panel_queuedetails.add(lblNewLabel);
 		panel_queuedetails.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
 		displaylist = new JTextArea(20, 70);
 		displaylist.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
 		displaylist.setEditable(false);
-		scrollList = new JScrollPane(panel_queuedetails, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		scrollList = new JScrollPane(panel_queuedetails, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollList.add(displaylist);
 		panel_queuedetails.add(displaylist);
 		getContentPane().add(scrollList);
@@ -66,15 +66,19 @@ public class CheckinConsole extends JFrame {
 		panel_3 = new JPanel();
 		panel_queuedetails.add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
 		JTextArea flight_1;
 		JTextArea flight_2;
 		JTextArea flight_3;
+		
 		flight_1 = new JTextArea(10, 40);
 		flight_1.setEditable(false);
 		panel_3.add(flight_1);
+		
 		flight_2 = new JTextArea(10, 40);
 		flight_2.setEditable(false);
 		panel_3.add(flight_2);
+		
 		flight_3 = new JTextArea(10, 40);
 		flight_3.setEditable(false);
 		panel_3.add(flight_3);
@@ -82,12 +86,6 @@ public class CheckinConsole extends JFrame {
 		queue_1 = new Queue();
 		Thread que1 = new Thread(queue_1);
 		que1.start();
-
-//		try {
-//			que1.join();
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
 
 		System.out.println("Desk 1 start");
 
@@ -103,7 +101,7 @@ public class CheckinConsole extends JFrame {
 		
 	}
 
-	private class Queue implements Runnable {
+	private class Queue implements Runnable { // This method to display the queue
 
 		public void run() {
 			System.out.println("Starting thread..." + Thread.currentThread().getName());
@@ -122,7 +120,6 @@ public class CheckinConsole extends JFrame {
 					while (iter.hasNext()) {
 						Booking bookingDetails = (Booking) iter.next();
 						displaylist.append(bookingDetails.getBookingDetails());
-						// iter.remove(); // TODO .. only for display, shouldn't remove items.
 					}
 				} catch (Exception e) {
 					continue;
@@ -139,9 +136,7 @@ public class CheckinConsole extends JFrame {
 		}
 	}
 
-	private class Desks implements Runnable {
-
-//		String[] flightNumber = new String[]{"Flight-1", "Flight-2", "Flight-3"}; // TODO .. Should be replaced with flight name and code from another class
+	private class Desks implements Runnable {  //This method for displaying passengers on Desks windows
 		
 		private final JTextArea desk;
 
@@ -165,17 +160,9 @@ public class CheckinConsole extends JFrame {
 					continue;
 				}
 
-				Booking bookingDetails = queue.poll();
-				desk.append(bookingDetails.getBookingDetails());
-
-//				try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e1) {
-//					e1.printStackTrace();
-//				}
 				
-//				Random r = new Random();
-//				System.out.println(FlightMap.assignToFlight(flightNumber[Math.abs(r.nextInt())%3])); // TODO .. to be updated
+					Booking bookingDetails = queue.poll();
+					desk.append(bookingDetails.getBookingDetails()); 
 			}
 		}
 	}
