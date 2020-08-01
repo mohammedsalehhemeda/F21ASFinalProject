@@ -91,15 +91,16 @@ public class CheckinConsole extends JFrame {
 
 		System.out.println("Desk 1 start");
 
-		desk1_result.append("Desk 1");
+		desk1_result.append("Desk 1:\n");
 		Desks desk_1 = new Desks(desk1_result);
 		Thread d1 = new Thread(desk_1);
 		d1.start();
 
-		desk2_result.append("Desk 2");
+		desk2_result.append("Desk 2:\n");
 		Desks desk_2 = new Desks(desk2_result);
 		Thread d2 = new Thread(desk_2);
 		d2.start();
+		
 	}
 
 	private class Queue implements Runnable {
@@ -109,7 +110,7 @@ public class CheckinConsole extends JFrame {
 
 			while (true) {
 				displaylist.setText("");
-				iter = q.ReadQueue().iterator();
+				iter = PassengerQueue.ReadQueue().iterator();
 
 				if (iter == null) {
 					System.out.println(
@@ -139,7 +140,9 @@ public class CheckinConsole extends JFrame {
 	}
 
 	private class Desks implements Runnable {
-		String[] flightNumber = new String[]{"Flight-1", "Flight-2", "Flight-3"};
+
+//		String[] flightNumber = new String[]{"Flight-1", "Flight-2", "Flight-3"}; // TODO .. Should be replaced with flight name and code from another class
+		
 		private final JTextArea desk;
 
 		public Desks(JTextArea desk) {
@@ -149,7 +152,7 @@ public class CheckinConsole extends JFrame {
 		public void run() {
 			System.out.println("Starting thread..." + Thread.currentThread().getName());
 
-			java.util.Queue<Booking> queue = q.ReadQueue();
+			java.util.Queue<Booking> queue = PassengerQueue.ReadQueue();
 			while (true) {
 				if (queue.isEmpty()) {
 
@@ -165,14 +168,14 @@ public class CheckinConsole extends JFrame {
 				Booking bookingDetails = queue.poll();
 				desk.append(bookingDetails.getBookingDetails());
 
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e1) {
+//					e1.printStackTrace();
+//				}
 				
-				Random r = new Random();
-				FlightMap.assignToFlight(flightNumber[Math.abs(r.nextInt())%3]); // TODO .. to be updated
+//				Random r = new Random();
+//				System.out.println(FlightMap.assignToFlight(flightNumber[Math.abs(r.nextInt())%3])); // TODO .. to be updated
 			}
 		}
 	}
