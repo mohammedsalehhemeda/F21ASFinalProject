@@ -41,6 +41,9 @@ public class CheckinManager {
 			helper.parseFlightDetail(flight_data);
 		}
 		
+
+		
+		
 		//Process all lines in booking data
 		for (String booking_data : raw_booking_data) {
 			helper.parseBookingDetail(booking_data);

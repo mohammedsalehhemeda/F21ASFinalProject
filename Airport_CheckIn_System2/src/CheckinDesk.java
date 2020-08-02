@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
+import java.util.concurrent.TimeUnit;
 import f21as.checkinsystem.models.Booking;
 import f21as.checkinsystem.models.Passenger;
 
@@ -10,7 +11,8 @@ import java.io.IOException;
 public class CheckinDesk implements Runnable{
     //private HashMap<String, Passenger> bookingPassengerHashMap;
     //private HashMap<String, Passenger> lastNamePassengerHashMap;
-    
+	
+
     PassengerQueue passengerQueue = null; 
     Booking bookingDetails = null; 
 
@@ -44,24 +46,35 @@ public class CheckinDesk implements Runnable{
             }
         } catch (IOException e) { //Throwing IOEXCEPTON while reading the file
             System.out.println(e.getMessage() + " Error with the CSV file");
-
         }
         */
         synchronized(passengerQueue){
-        	Iterator iter = passengerQueue.ReadQueue().iterator();
+        	java.util.Iterator<Booking> iter = passengerQueue.ReadQueue().iterator();
         	if(iter == null){
             	System.out.println("Queue is empty. No more passengers to proceed..."+Thread.currentThread().getName());
                 //System.exit(1);
             }
             while(iter.hasNext()){
                 bookingDetails = (Booking) iter.next();
+      
+
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    // recommended because catching InterruptedException clears interrupt flag
+//                    Thread.currentThread().interrupt();
+//                    // you probably want to quit if the thread is interrupted
+//                    return;
+//                }
+//                
+                
                 System.out.println(bookingDetails.getBookingDetails());
                 iter.remove();
             }
         }
-        
+
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			System.out.println(e1.getMessage());
 		}

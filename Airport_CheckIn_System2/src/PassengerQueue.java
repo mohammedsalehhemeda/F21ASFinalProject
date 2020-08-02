@@ -1,13 +1,20 @@
 import java.util.*; 
+import java.util.concurrent.TimeUnit;
+
 
 import f21as.checkinsystem.models.*;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
+public class PassengerQueue implements Container {
 
-public class PassengerQueue {
-	
+	   public Iterator getIterator() {
+		      return new NameIterator();
+		   }
+
 	private static PassengerQueue instance = null; 
 	private static Queue<Booking> queueBooking = new LinkedList<>(); 
 	
-	private PassengerQueue() {
+	PassengerQueue() {
 		if (instance != null) {
 			throw new IllegalStateException("Object already instanciated.");
 		}
@@ -32,4 +39,29 @@ public class PassengerQueue {
 		return queueBooking;
 	}
 
-}
+
+	
+	   private class NameIterator implements Iterator {
+
+		      int index;
+		      Booking booking;
+		      @Override
+		      public boolean hasNext() {
+		      
+		         if(index < queueBooking.size()){
+		            return true;
+		         }
+		         return false;
+		      }
+
+		      @Override
+		      public Object next() {
+		      
+		         if(this.hasNext()){
+		            return queueBooking.add(booking);
+		         }
+		         return null;
+		      }		
+		   }
+		}
+
