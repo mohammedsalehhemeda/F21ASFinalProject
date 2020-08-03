@@ -1,7 +1,9 @@
+//import the required libraries
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
+
+//
 public class CheckinManager {
 	
 	private UtilityFileHelper helper;

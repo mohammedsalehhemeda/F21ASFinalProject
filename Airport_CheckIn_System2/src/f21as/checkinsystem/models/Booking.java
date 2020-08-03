@@ -1,14 +1,20 @@
+//used under the following package
+
 package f21as.checkinsystem.models;
+
+//this class to help identifying the Baggage rules
 
 public class Booking {
 	
+	//declare the variables for the booking details
+
 	private String reference;
 	private Passenger passenger;
 	private Boolean is_checked_in;
 	private String flight_code;
 	private Baggage baggage_info;
 	
-	//Getters
+	//Getters and setters
 	public String getReference() {
 		return reference;
 	}
@@ -64,7 +70,8 @@ public class Booking {
 		return booking_details;
 	}
 	
-		
+	//the baggage constructor to create booking objects
+
 	public Booking(String _reference, String _flight_code,Passenger _passenger, Boolean checkin_status) {
 		reference = _reference;
 		flight_code = _flight_code;

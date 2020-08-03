@@ -1,9 +1,14 @@
+
+//import the required libraries
 import java.awt.*;
 import javax.swing.*;
 import java.util.Iterator;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import f21as.checkinsystem.models.*;
+
+//this is the main GUI class
+
 
  class GUICheckIn extends JFrame {
 	private JPanel maincontent_pane, panel_queuedetails, panel_2, panel_3;
@@ -156,7 +161,7 @@ import f21as.checkinsystem.models.*;
 		}
 	
 	}
-
+	//
 		
 
 	public GUICheckIn() {

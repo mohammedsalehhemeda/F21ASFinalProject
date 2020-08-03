@@ -9,7 +9,7 @@ public class UtilityObjectCreator {
 		SimpleEntry<Boolean, Passenger> result = new AbstractMap.SimpleEntry<>(false,null);
 			
 		//if (!Passenger.isValidName(full_name))return result; //At this point return false
-		
+		//
 		Passenger new_passenger = new Passenger(referenceNumber, fullName, checkedIn);
 		result = new AbstractMap.SimpleEntry<>(true,new_passenger);
 		return result;

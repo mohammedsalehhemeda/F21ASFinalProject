@@ -1,7 +1,13 @@
+//used under the following package
+
 package f21as.checkinsystem.models;
+
+//this class to help identifying the Baggage rules
 
 public class Flight {
 	
+	//declare the variables for the flights details
+
 	private String flight_code;
 	private String carrier_name;
 	private String destination_code;
@@ -12,7 +18,7 @@ public class Flight {
 	private Double max_baggage_volume_pax;
 	private Double excess_baggage_fee;
 	
-	//Getters
+	//Getters and setters
 	public String getName() {
 		return carrier_name;
 	}
@@ -45,7 +51,6 @@ public class Flight {
 		return excess_baggage_fee;
 	}
 	
-	//Setters
 	
 	public static boolean isValidCode(String _flight_code)
 	{
@@ -53,6 +58,9 @@ public class Flight {
 		return true;
 	}
 	
+	
+	//the baggage constructor to create flight objects
+
 	public Flight (String _carrier_name, String _flight_code,Integer _max_seats, Double _weight_pax, Double _volume_pax, Double _excee_fee, String _des_code, String _des_location,String _des_airport) {
 		carrier_name = _carrier_name;
 		flight_code = _flight_code;

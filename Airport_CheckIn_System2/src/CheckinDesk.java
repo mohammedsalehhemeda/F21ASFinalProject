@@ -1,19 +1,21 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.*;
 
+//import the required libraries
 import f21as.checkinsystem.models.Booking;
-import f21as.checkinsystem.models.Passenger;
 
-import java.io.IOException;
+//
 
+//in this class, the program speared the passengers to two check-in desks.
 public class CheckinDesk implements Runnable{
     //private HashMap<String, Passenger> bookingPassengerHashMap;
     //private HashMap<String, Passenger> lastNamePassengerHashMap;
     
+	
+	//Declare two objects
     PassengerQueue passengerQueue = null; 
     Booking bookingDetails = null; 
 
+    
+    
     public CheckinDesk(PassengerQueue q){
         //bookingPassengerHashMap = new HashMap<>();
         //lastNamePassengerHashMap = new HashMap<>();
@@ -26,6 +28,7 @@ public class CheckinDesk implements Runnable{
  * @return hash map (reference number, Passenger)
  * @return hash map (last name, Passenger)
  */
+    
     public void run() {
 //    	System.out.println("Starting thread..."+Thread.currentThread().getName());
         /*
@@ -46,6 +49,10 @@ public class CheckinDesk implements Runnable{
             System.out.println(e.getMessage() + " Error with the CSV file");
         }
         */
+    	
+    	
+    	//iterate the objects then send them to the other classes
+    	
         synchronized(passengerQueue){
         	Iterator iter = (Iterator) PassengerQueue.ReadQueue().iterator();
         	if(iter == null){

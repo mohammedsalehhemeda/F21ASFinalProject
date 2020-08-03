@@ -1,10 +1,11 @@
+
+//import the required libraries
 import java.util.*; 
-import java.util.concurrent.TimeUnit;
-
-
 import f21as.checkinsystem.models.*;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
+
+//
+//this class to iterate PassengerQueue and Queue<Booking>
 public class PassengerQueue implements Container {
 
 	   public Iterator getIterator() {
