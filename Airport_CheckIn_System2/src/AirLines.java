@@ -2,23 +2,14 @@ import javax.swing.JTextArea;
 
 import f21as.checkinsystem.models.Booking;
 
-class Desks  implements Runnable  {  //This method for displaying passengers on Desks windows
+ class AirLines implements Runnable {  //This method for displaying passengers on Desks windows
 		
-		private final JTextArea desk;
-		private JTextArea airline;
-		
-		public Desks(JTextArea desk) {
-			this.desk = desk;
-	
+		private final JTextArea airline;
+
+		public AirLines(JTextArea airline) {
+			this.airline = airline;
 		}
 
-		
-		
-
-	
-		
-		
-		
 		public void run() {
 			System.out.println("Starting thread..." + Thread.currentThread().getName());
 
@@ -27,17 +18,14 @@ class Desks  implements Runnable  {  //This method for displaying passengers on 
 				if (queue.isEmpty()) {
 
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(10000);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
 					
 					continue;
-					
-					
 				}
-				
-				
+
 				
 				long globalStartTime = System.nanoTime();
 			    float currentTime = 0;
@@ -47,9 +35,11 @@ class Desks  implements Runnable  {  //This method for displaying passengers on 
 			    }
 				if(currentTime >5.5) {
 					Booking bookingDetails = queue.poll();
-					desk.append(bookingDetails.getBookingDetails()+"---"+bookingDetails.getFlightCode()+"\n"); 
-
-				}
+//					String joined = String.join("\n", FlightMap.getSetOfFlightCodes(bookingDetails.getFlightCode()));
+					airline.append(bookingDetails.getFlightCode()+"---"+FlightMap.getNumberOfPassengers(bookingDetails.getFlightCode()));
+	//				
 					}
-		}
-	}
+//					airline.append(joined);
+	//				System.out.println(joined);
+					
+			}}}
