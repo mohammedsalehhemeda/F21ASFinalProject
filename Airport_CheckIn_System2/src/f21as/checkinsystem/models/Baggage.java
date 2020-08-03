@@ -1,14 +1,19 @@
 package f21as.checkinsystem.models;
 
+//this class to help identifying the Baggage rules
+
+
 public class Baggage {
 
+	
+//declare the variables for the baggages
 	private Double length;
 	private Double width;
 	private Double height;
 	private Double weight;
 	private Double excess_fee_paid;
 	
-	//Getters
+	//Getters and setters
 	public Double getVolume() {
 		return (length*width*height)/(100*100*100); //returning in cubic meter
 	}
@@ -16,6 +21,7 @@ public class Baggage {
 	public Double getWeight() {
 		return weight;
 	}
+	
 	
 	public Double calcuateExcessFee(Double allowed_weight, Double fee_per_kg) {
 		Double excess_fee = 0.0;
@@ -35,7 +41,7 @@ public class Baggage {
 			return excess_fee_paid;
     }
 	
-		
+		//the baggage constructor to create baggage objects
 	public Baggage(Double _length_cm, Double _width_cm,Double _height_cm, Double _weight_kg) {
 		length = _length_cm;
 		width = _width_cm;

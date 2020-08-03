@@ -1,13 +1,20 @@
 package f21as.checkinsystem.models;
+//this class to help identifying the passengers details
+
 /**
  * This class to encapsulate all passengers' details
  * @author mohammedkhedr
  *
  */
 public class Passenger {
+	
+	//declare the variables for the passenger details
+
     private String fullName;
     private String referenceNumber;
     private boolean checkedIn;
+
+	//declare the constructor of the passenger to create objects from it
 
     public Passenger(String referenceNumber, String fullName, boolean checkedIn){
         this.referenceNumber = referenceNumber;
@@ -15,6 +22,7 @@ public class Passenger {
         this.checkedIn = checkedIn;
     }
 
+    //getters and setters
     public String getFullName() {
         return fullName;
     }

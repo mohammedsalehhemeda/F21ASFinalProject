@@ -1,5 +1,9 @@
-import java.util.*;
+//This is the airlines class
+//The class is used to manage the bookings
+//Objects of this class have been used a lot in the other classes 
 
+//import the required libraries
+import java.util.*;
 import f21as.checkinsystem.models.Baggage;
 import f21as.checkinsystem.models.Booking;
 import f21as.checkinsystem.models.Flight;
@@ -9,7 +13,9 @@ public class BookingManager {
 	//STATIC PROPERTIES TO BE ACCESSED BY OTHER METHODS AS WELL
 		private static TreeMap<String, Booking> bookings_map = new TreeMap<String,Booking>();
 		private static HashMap<String, Flight> flights_map = new HashMap<String,Flight>();
-			
+	
+		
+
 		public static Booking getBooking(String reference_number) {
 			try {
 				if (!bookings_map.containsKey(reference_number)) return null;
