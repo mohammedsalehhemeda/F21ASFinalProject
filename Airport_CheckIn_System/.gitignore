@@ -1,7 +1,0 @@
-/bin/
-# Eclipse Core      
-.project
-/.settings/
-
-# JDT-specific    
-.classpath
