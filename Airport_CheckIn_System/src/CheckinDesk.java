@@ -24,7 +24,7 @@ public class CheckinDesk implements Runnable{
 	 * Run the main thread where each Passenger/Booking will be processed and assigned to their Flight 
 	 */
     public void run() {
-    	System.out.println("Starting thread..."+Thread.currentThread().getName());
+//    	System.out.println("Starting thread..."+Thread.currentThread().getName());
         
         synchronized(passengerQueue){
         	Iterator iter = passengerQueue.ReadQueue().iterator();
@@ -45,7 +45,6 @@ public class CheckinDesk implements Runnable{
 			System.out.println(e1.getMessage());
 		}
 		
-		// an amount of time - we should check if 
     	System.out.println("Completing thread..."+Thread.currentThread().getName());
     }
     
