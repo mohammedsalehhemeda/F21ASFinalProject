@@ -79,6 +79,8 @@ public class CheckinDesk implements Runnable{
 			System.out.println(e1.getMessage());
 		}
     	System.out.println("Completing thread..."+Thread.currentThread().getName());
+    	
+    	
     }
 
 /**

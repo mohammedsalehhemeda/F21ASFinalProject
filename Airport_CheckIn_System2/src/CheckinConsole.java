@@ -7,10 +7,12 @@ import f21as.checkinsystem.models.*;
 
 public class CheckinConsole extends JFrame {
 	private JPanel maincontent_pane, panel_queuedetails, panel_2, panel_3;
-	private JTextArea displaylist, flight_3;
+	private JTextArea displaylist, flight_1, flight_2, flight_3;
 	private CardLayout mainCard = new CardLayout(0, 0);
 	private JScrollPane scrollList;
 	private Iterator<Booking> iter;
+	private PassengerQueue q = PassengerQueue.getInstance();
+	private CheckinManager chkInManager = new CheckinManager();
 	private Queue queue_1;
 
 	//
@@ -55,7 +57,6 @@ public class CheckinConsole extends JFrame {
 		JTextArea desk1_result = new JTextArea(10, 60);
 		desk1_result.setEditable(false);
 		panel_2.add(desk1_result);
-		
 
 		JTextArea desk2_result = new JTextArea(10, 60);
 		desk2_result.setEditable(false);
@@ -103,17 +104,12 @@ public class CheckinConsole extends JFrame {
 	private class Queue implements Runnable { // This method to display the queue
 
 		public void run() {
-			
 			System.out.println("Starting thread..." + Thread.currentThread().getName());
 
 			while (true) {
-				
 				displaylist.setText("");
 				iter = PassengerQueue.ReadQueue().iterator();
-				
-				
-	
-					
+
 				if (iter == null) {
 					System.out.println(
 							"Queue is empty. No more passengers to proceed..." + Thread.currentThread().getName());
@@ -122,61 +118,25 @@ public class CheckinConsole extends JFrame {
 
 				try {
 					while (iter.hasNext()) {
-
-
 						Booking bookingDetails = (Booking) iter.next();
 						displaylist.append(bookingDetails.getBookingDetails());
-						
-					    
-						
-						
-						
 					}
 				} catch (Exception e) {
 					continue;
 				}
 
-
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 				
 				System.out.println("Completing thread..." + Thread.currentThread().getName());
-				
-				
 			}
 		}
 	}
 
-	private class Desks implements Runnable {  //This method for displaying passengers on Desks windows
-		
-		private final JTextArea desk;
-
-		public Desks(JTextArea desk) {
-			this.desk = desk;
-		}
-
-		public void run() {
-			System.out.println("Starting thread..." + Thread.currentThread().getName());
-
-			java.util.Queue<Booking> queue = PassengerQueue.ReadQueue();
-			
-			while (true) {
-				if (queue.isEmpty()) {
-
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-					
-					continue;
-				}
-
-				
-					Booking bookingDetails = queue.poll();
-					desk.append(bookingDetails.getBookingDetails()); 
-			}
-		}
-	}
-
+	
 	public CheckinConsole() {
 		setupMainFrame();
 		GUInterface();
@@ -184,17 +144,3 @@ public class CheckinConsole extends JFrame {
 
 	}
 }
-
-
-//
-//try {
-//    // to sleep 10 seconds
-//    Thread.sleep(5000);
-//} catch (InterruptedException e) {
-//    // recommended because catching InterruptedException clears interrupt flag
-//    Thread.currentThread().interrupt();
-//    // you probably want to quit if the thread is interrupted
-//    return;
-//}
-
-
