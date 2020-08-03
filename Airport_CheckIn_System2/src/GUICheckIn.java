@@ -99,8 +99,26 @@ import f21as.checkinsystem.models.*;
 		Thread d2 = new Thread(desk_2);
 		d2.start();
 		
+		flight_1.append("Flight 1:\n");
+		AirLines flight1 = new AirLines(flight_1);
+		Thread f1 = new Thread(flight1);
+		f1.start();
+		
+		flight_2.append("Flight 2:\n");
+		AirLines flight2 = new AirLines(flight_2);
+		Thread f2 = new Thread(flight2);
+		f2.start();
+		
+		flight_3.append("Flight 3:\n");
+		AirLines flight3 = new AirLines(flight_3);
+		Thread f3 = new Thread(flight3);
+		f3.start();
+		
 	}
 
+	
+	
+	
 	private class Queue implements Runnable { // This method to display the queue
 
 		public void run() {
@@ -120,6 +138,8 @@ import f21as.checkinsystem.models.*;
 					while (iter.hasNext()) {
 						Booking bookingDetails = (Booking) iter.next();
 						displaylist.append(bookingDetails.getBookingDetails());
+						
+						
 					}
 				} catch (Exception e) {
 					continue;
@@ -134,6 +154,7 @@ import f21as.checkinsystem.models.*;
 				System.out.println("Completing thread..." + Thread.currentThread().getName());
 			}
 		}
+	
 	}
 
 		
