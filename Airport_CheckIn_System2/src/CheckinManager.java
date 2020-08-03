@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class CheckinManager {
@@ -19,7 +20,7 @@ public class CheckinManager {
 		if (!processData()) return;  
 		
 		//Display check in console
-		CheckinConsole _console = new CheckinConsole();
+		GUICheckIn _console = new GUICheckIn();
 		_console.setVisible(true);
 	}
 	

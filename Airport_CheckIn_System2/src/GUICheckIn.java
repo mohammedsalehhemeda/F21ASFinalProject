@@ -5,7 +5,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import f21as.checkinsystem.models.*;
 
-public class CheckinConsole extends JFrame {
+
+
+public class GUICheckIn extends JFrame {
 	private JPanel maincontent_pane, panel_queuedetails, panel_2, panel_3;
 	private JTextArea displaylist, flight_1, flight_2, flight_3;
 	private CardLayout mainCard = new CardLayout(0, 0);
@@ -137,7 +139,7 @@ public class CheckinConsole extends JFrame {
 	}
 
 	
-	public CheckinConsole() {
+	public GUICheckIn() {
 		setupMainFrame();
 		GUInterface();
 		setVisible(true);
