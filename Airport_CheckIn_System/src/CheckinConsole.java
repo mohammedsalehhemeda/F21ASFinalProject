@@ -1,6 +1,12 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Hashtable;
 import javax.swing.*;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import f21as.checkinsystem.models.*;
@@ -99,6 +105,21 @@ public class CheckinConsole extends JFrame {
 		Thread d2 = new Thread(desk_2);
 		d2.start();
 		
+		flight_1.append("Flight 1:\n");
+		Airlines flight1 = new Airlines(flight_1);
+		Thread f1 = new Thread(flight1);
+		f1.start();
+		
+		flight_2.append("Flight 2:\n");
+		Airlines flight2 = new Airlines(flight_2);
+		Thread f2 = new Thread(flight2);
+		f2.start();
+		
+		flight_3.append("Flight 3:\n");
+		Airlines flight3 = new Airlines(flight_3);
+		Thread f3 = new Thread(flight3);
+		f3.start();
+		
 	}
 
 	private class Queue implements Runnable { // This method to display the queue
@@ -162,7 +183,65 @@ public class CheckinConsole extends JFrame {
 
 				
 					Booking bookingDetails = queue.poll();
-					desk.append(bookingDetails.getBookingDetails()); 
+					desk.append(bookingDetails.getBookingDetails()+"---"+bookingDetails.getFlightCode()+"\n"); 
+
+			}
+		}
+	}
+	
+/*	public Hashtable assignAirlines() {
+		Hashtable<String, Integer> fMap = new Hashtable<>();
+		java.util.Queue<Booking> queue = PassengerQueue.ReadQueue();
+		while (true) {
+			if (queue.isEmpty()) {
+
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				
+				continue;
+			}
+
+			
+				Booking bookingDetails = queue.poll();
+				fMap.put(bookingDetails.getFlightCode(),FlightMap.assignToFlight(bookingDetails.getFlightCode()));
+				System.out.print(Integer.toString(FlightMap.assignToFlight(bookingDetails.getBookingDetails())));
+				return fMap;
+		}
+		
+	}
+*/	
+	private class Airlines implements Runnable {  //This method for displaying passengers on Desks windows
+		
+		private final JTextArea airline;
+
+		public Airlines(JTextArea airline) {
+			this.airline = airline;
+		}
+
+		public void run() {
+			System.out.println("Starting thread..." + Thread.currentThread().getName());
+
+			java.util.Queue<Booking> queue = PassengerQueue.ReadQueue();
+			while (true) {
+				if (queue.isEmpty()) {
+
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					
+					continue;
+				}
+
+					Booking bookingDetails = queue.poll();
+//					String joined = String.join("\n", FlightMap.getSetOfFlightCodes(bookingDetails.getFlightCode()));
+					airline.append(bookingDetails.getFlightCode()+"---"+FlightMap.getNumberOfPassengers(bookingDetails.getFlightCode()));
+	//				airline.append(joined);
+	//				System.out.println(joined);
 			}
 		}
 	}
