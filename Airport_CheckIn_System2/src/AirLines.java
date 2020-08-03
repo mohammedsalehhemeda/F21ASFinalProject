@@ -1,6 +1,6 @@
 //This is the airlines class
 //The class is to send the flights data to the GUI
-
+//
 //import the required libraries
 import javax.swing.JTextArea;
 import f21as.checkinsystem.models.Booking;

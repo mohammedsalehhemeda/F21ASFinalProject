@@ -2,7 +2,7 @@
 //import the required libraries
 import f21as.checkinsystem.models.Booking;
 
-
+//
 
 //in this class, the program speared the passengers to two check-in desks.
 public class CheckinDesk implements Runnable{

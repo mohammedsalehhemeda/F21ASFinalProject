@@ -1,3 +1,5 @@
+//used under the following package
+
 package f21as.checkinsystem.models;
 
 //this class to help identifying the Baggage rules
